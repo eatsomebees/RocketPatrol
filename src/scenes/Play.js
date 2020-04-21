@@ -70,10 +70,8 @@ class Play extends Phaser.Scene {
         // game over flag
         this.gameOver = false;
 
-        // 60-second play clock
+        
         scoreConfig.fixedWidth = 0;
-
-        console.log(game.settings.highScore);
 
         //highscore text variable
         this.hscore = this.add.text(350, 54, 'Highscore: ' + game.scores.highScore, scoreConfig);
@@ -81,10 +79,16 @@ class Play extends Phaser.Scene {
         //fire text variable
         this.fireText = this.add.text(250, 54, ' FIRE!', scoreConfig);
 
+        // 60-second play clock
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+        }, null, this);
+
+        // 30-second play clock
+        this.clock = this.time.delayedCall(30000, () => {
+            game.settings.spaceshipSpeed += 3;
         }, null, this);
     }
 
