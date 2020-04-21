@@ -1,3 +1,7 @@
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 // Spaceship prefab
 class Spaceship extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame, pointValue) {
@@ -8,21 +12,40 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 
       //store point value
       this.points = pointValue;
+
+      //sets ship direction
+      this.dir = getRandomInt(2);
     }
 
     update() {
-        //move ship left
-        this.x -= game.settings.spaceshipSpeed;
 
-        //wrap around screen from left to right
-        if(this.x <= 0-this.width)
+        //move ship left or right
+        if(this.dir == 1)
         {
-           this.reset();
+          this.x -= game.settings.spaceshipSpeed;
+          //wrap around screen from left to right
+          if(this.x <= 0-this.width)
+          {
+            this.resetRight();
+          }
         }
+        else
+        {
+          this.x += game.settings.spaceshipSpeed;
+          if(this.x > game.config.width)
+          {
+            this.resetLeft();
+          }
+        }
+        
 
     }
         
-    reset() {
+    resetRight() {
         this.x = game.config.width;
+    }
+
+    resetLeft() {
+        this.x = 0-this.width;
     }
   }
