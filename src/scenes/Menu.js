@@ -34,9 +34,9 @@ class Menu extends Phaser.Scene {
         this.add.text(centerX, centerY - textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
         this.add.text(centerX, centerY, '<- -> arrows to move and (F) to fire', menuConfig).setOrigin(0.5);
         //highscore
-        this.add.text(centerX, centerY - textSpacer - textSpacer, '<- -> arrows to move and (F) to fire', menuConfig).setOrigin(0.5);
-        //menuConfig.backgroundColor = '#00FF00';
-        //menuConfig.color = '#000';
+        this.add.text(centerX, centerY - textSpacer - textSpacer, 'Highscore: ' + game.scores.highScore, menuConfig).setOrigin(0.5);
+        menuConfig.backgroundColor = '#00FF00';
+        menuConfig.color = '#000';
         this.add.text(centerX, centerY + textSpacer, 'Press <- for easy and -> for Hard', menuConfig).setOrigin(0.5);
 
         //scene change
