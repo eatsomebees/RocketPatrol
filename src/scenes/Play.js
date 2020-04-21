@@ -75,7 +75,11 @@ class Play extends Phaser.Scene {
 
         console.log(game.settings.highScore);
 
+        //highscore text variable
         this.hscore = this.add.text(350, 54, 'Highscore: ' + game.scores.highScore, scoreConfig);
+
+        //fire text variable
+        this.fireText = this.add.text(250, 54, ' FIRE!', scoreConfig);
 
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
@@ -109,6 +113,16 @@ class Play extends Phaser.Scene {
             this.ship01.update();           // update spaceships (x3)
             this.ship02.update();
             this.ship03.update();
+
+            //print fire button
+            if(this.p1Rocket.isFiring)
+            {
+                this.fireText.text = 'FIRE!';
+            }
+            else
+            {
+                this.fireText.text = '';
+            }
         } 
 
         // check collisions
