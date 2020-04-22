@@ -14,6 +14,7 @@ class Play extends Phaser.Scene {
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('spaceship2', './assets/spaceship2.png', {frameWidth: 63, frameHeight: 32, startFrame: 0, endFrame: 3});
       }
 
     create() {
@@ -38,9 +39,9 @@ class Play extends Phaser.Scene {
         this.p1Rocket = new Rocket(this, game.config.width/2 - 8, 431, 'rocket').setScale(0.5, 0.5).setOrigin(0, 0);
 
         // add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + 192, 132, 'spaceship', 0, 30).setOrigin(0,0);
-        this.ship02 = new Spaceship(this, game.config.width + 96, 196, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, 260, 'spaceship', 0, 10).setOrigin(0,0);
+        this.ship01 = new Spaceship(this, game.config.width + 192, 132, 'spaceship2', 0, 30).setOrigin(0,0);
+        this.ship02 = new Spaceship(this, game.config.width + 96, 196, 'spaceship2', 0, 20).setOrigin(0,0);
+        this.ship03 = new Spaceship(this, game.config.width, 260, 'spaceship2', 0, 10).setOrigin(0,0);
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -53,6 +54,18 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
+
+        //ship sprite animation
+        this.anims.create({
+            key: 'flash',
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('spaceship2', { start: 0, end: 3, first: 0}),
+            frameRate: 5
+
+        });
+        this.ship01.play('flash');
+        this.ship02.play('flash');
+        this.ship03.play('flash');
 
         // score
         this.p1Score = 0;
